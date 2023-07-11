@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<style>
+    body {
+            background-color: #ddd;
+            overflow-x: hidden;
+            cursor: pointer;
+        }
+
+    .bg1 {
+            position: absolute;
+            bottom: 0px;
+            height: 300px;
+            width: 100%;
+            background: url(static/images/bg1.png) repeat-x;
+            animation: change_bg 5s linear infinite;
+        }
+        
+    .bg2 {
+        position: absolute;
+        bottom: 0px;
+        height: 300px;
+        width: 100%;
+        z-index: 1;
+        background: url(static/images/bg2.png) repeat-x;
+        animation: change_bg 5s linear infinite;
+    }
+    
+    .img {
+        position: fixed;
+        bottom: 10px;
+        height: 100px;
+        width: 200px;
+        z-index: 2;
+        background: url(static/images/bear.png);
+        animation: bear .4s steps(8) infinite, change_pos 2s forwards;
+    }
+
+    .search_box{
+        /* 绝对定位，元素水平垂直居中 */
+        position: absolute;
+        top:10%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        /* 设置背景颜色 */
+        background-color:#2f3640;
+        /* 设置图标默认状态下大小，圆形 */
+        height:40px;
+        padding:10px;
+        /* 设置圆角 */
+        border-radius:40px;
+    }
+    .search_text{
+        /* 清除默认样式 */
+        border:none;
+        background:none;
+        outline:none;
+        float:left;
+        padding:0;
+        color:#fff;
+        /* 设置文字样式 */
+        font-size:16px;
+        line-height:40px;
+        width:0;
+        /* 动画过渡 */
+        transition:0.5s;
+    }
+    
+    /* 先设置默认状态，40px 的黑色圆形搜索框，中心为外网导入的红色 search 图标； */
+    .search_btn{
+        color:#e84118;
+        float:right;
+        /* 设置默认状态下搜索框样式 */
+        width:40px;
+        height:40px;
+        /* 圆角 */
+        border-radius:50%;
+        background-color:#2f3640;
+        /* 弹性布局，水平垂直居中 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        cursor:pointer;
+        /* 动画过渡 */
+        transition:0.5s;
+    }
+    
+    /* 当鼠标移入时，触发动画效果，动画过渡为 0.5s，搜索框展开至 200px，
+并使搜索图标颜色变换；鼠标移出时，搜索框恢复默认状态。 */
+    /* 鼠标移入时，触发效果，搜索框展开 */
+    .search_box:hover .search_text{
+        width:400px;
+        padding:0 6px;
+    }
+    /* 鼠标移入时，搜索图标背景颜色变化 */
+    .search_box:hover .search_btn{
+        background-color:#fff;
+    }
+    
+    @keyframes bear {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -1600px 0;
+            }
+        }
+        
+    @keyframes change_pos {
+        0% {
+            left: 0;
+        }
+        100% {
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+    }
+    
+    @keyframes change_bg {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: -3840px 0;
+        }
+    }
+</style>
+
+<body>
+    <div class="table">
+        <div class="me">
+            <a href="static/templates/me.html" title="账号管理">
+                <img src="static/images/me.png" alt="" class="me_png">
+            </a>
+        </div>
+        <div class="com">
+            <a href="static/templates/cloud.html">
+                <img src="static/images/cloud.png" alt="" class="com_png">
+            </a>
+            <a href="static/templates/heatMap_charts.html">
+                <img src="static/images/hm.png" alt="" class="com_png">
+            </a>
+        </div>
+    </div>
+    <div class="question">
+        <form action="/web_answer", method="post">
+            <div class="search_box">
+                <input type="text" class="search_text" placeholder="请 输 入 想 要 查 询 的 内 容" name="question">
+                <a class="search_btn">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+            </div>
+        </form>
+        <div>
+            <div class="answer">
+                <p>
+                    {{answer.content}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <div class="img"></div>
+</body>
+</html>

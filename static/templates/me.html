@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename = 'js/me.js') }}"></script>
+    <title>账号管理</title>
+</head>
+<style>
+    table, th, td {
+        border: solid 1px #efefef;
+    }
+    table {
+        width: 100%;
+        margin: auto;
+        border-collapse: collapse;
+        text-align: center;
+        border-radius: 6px;
+    }
+    td,th{
+        padding: 10px;
+    }
+    a {
+        text-decoration-line: none;
+        color: green;
+    }
+    a:hover {
+        color: brown;
+        text-decoration-line: underline;
+    }
+    tr:first-child {
+        background-color: #efefef;
+        border-radius: 4px 4px 0 0;
+        border-bottom: solid 1px #ddd;
+    }
+    table caption {
+        font-size: 1.5rem;
+        font-weight: bolder;
+        margin-bottom: 20px;
+    }
+    p {
+        text-align: center;
+
+        display: flex;
+        justify-content: center;
+        
+    }
+    /*首页样式*/
+    p a:first-child {
+        width: 56px;
+    }
+    p a:last-child {
+        width: 56px;
+    }
+    p a {
+        display: inline-block;
+        width: 28px;
+        height: 24px;
+        border: 1px solid green;
+        margin-left:2px;
+        line-height: 24px;
+    }
+    /*当前页样式*/
+    .active {
+        background-color: green;
+        color: white;
+    }
+    .more {
+        border: none;
+    }
+
+    .main{
+	margin: 0,0,0,0;
+	overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    }
+    button{
+        width:100px;
+        height:30px;
+        font-size: 15px;
+        background-color:#21bf73 ;
+        color: white;
+        border:none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 0 10px;
+    }
+    .form_1{
+        width:400px;
+        height:300px;
+        border:3px solid #f8f8f8;
+        visibility: hidden;
+        position: absolute;
+        z-index: 999;
+        opacity: 1;
+        overflow: hidden;
+        background-color: white;
+        text-align: center;
+        margin-top: 10%;
+        margin-left: 35%;
+        border-radius: 10px;
+    }
+    .form_2{
+        width:400px;
+        height:300px;
+        border:3px solid #f8f8f8;
+        visibility: hidden;
+        position: absolute;
+        z-index: 999;
+        opacity: 1;
+        overflow: hidden;
+        background-color: white;
+        text-align: center;
+        margin-top: 10%;
+        margin-left: 35%;
+        border-radius: 10px;
+    }
+    .open{
+        visibility: visible;
+        opacity: 1;
+    }
+    .input_1{
+        margin-top: 15px;
+        width:100%;
+        height:40px;
+        
+    }
+    .input_1 button{
+        color: black;
+    }
+    input{
+        width:280px;
+        height:30px;
+        border-radius: 5px;
+        border:1px solid  #e5dfdf;
+    }
+
+    .submit_1{
+        width:280px;
+        height:30px;
+        border-radius: 5px;
+        border:1px solid  #e5dfdf;
+    }
+    .input_1 .login_logo{
+        text-align: left;
+        font-size: 20px;
+        font-weight: 300;
+        padding-left: 30px;
+        float: left;
+    }
+    .input_1 .close{
+        width:20px;
+        height:20px;
+        color:#5d5d5d;
+        text-align: center;
+        line-height: 20px;
+        border:1px solid  #5d5d5d;
+        border-radius: 50%;
+        float: right;
+        padding-top: 0px;
+        margin-right: 10px;
+        font-size: 12px;
+        cursor: pointer;
+    }
+    .input_1 .close:hover{
+        cursor:pointer;
+    }
+    .input_1 .close_1{
+        width:20px;
+        height:20px;
+        color:#5d5d5d;
+        text-align: center;
+        line-height: 20px;
+        border:1px solid  #5d5d5d;
+        border-radius: 50%;
+        float: right;
+        padding-top: 0px;
+        margin-right: 10px;
+        font-size: 12px;
+    }
+    .input_1 .close_1:hover{
+        cursor:pointer;
+    }
+    .input_1 .submit_1{
+        border:2px solid #f88020;
+        height:40px;
+        background-color: white;
+    }
+    .input_1 .submit_1:hover{
+        background-color: #f88020;
+        color:white;
+    }
+    .test{
+        overflow: hidden;
+    }
+    #btn_2{
+        background-color: #F88020;
+    }
+    .dialog{
+        width:300px;
+        height:120px;
+        border:2px solid #46b3e6;
+        overflow: hidden;
+        visibility: hidden;
+        z-index: 999;
+        overflow: hidden;
+        opacity: 1;
+        position: absolute;
+        background-color: white;
+        margin-top: 5%;
+        margin-left: 40%;
+    }
+    .dialog .title{
+        text-align: center;
+        font-size: 20px;
+        font-weight: 300;
+        margin-top: 28px;
+        margin-bottom: 25px;
+    }
+    .dialog  .btn_2{
+        width:50%;
+        height:40px;
+        float:left;
+        background-color: #dff6f0;
+        line-height: 40px;
+        color: black;
+        text-align: center;
+        margin-bottom: 0px;
+    }
+    .dialog .btn_2:hover{
+        background-color:#F88020 ;
+    }
+    .dialog  .close_1{
+        overflow: hidden;
+        width:50%;
+        height:40px;
+        background-color: red;
+        margin-bottom: 0px;
+        line-height: 40px;
+        color: white;
+        text-align: center;
+    }
+    .dialog .close_1:hover{
+        background-color: #f4f4f4;
+        color:red;
+        cursor: cell;
+    }
+</style>
+<body>
+<h3>账号管理</h3>
+<table class="table table-hover text-center">
+    <tbody>
+    <tr>
+        <th width="30%">ID</th>
+        <th width="40%">用户名</th>
+        <th width="30%">密码</th>
+    </tr>
+
+    {% for row in data %}
+        <tr>
+            {% for col in row %}
+            <td>{{ col|safe }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+<div class="main">
+    <button id="btn_1">修改</button>
+    <div class="form_1">
+        <form action="/web_modify" method="post">
+        <div class="input_1"><div class="login_logo">修改密码</div><div class="close">X</div></div>
+        <div class="input_1"><input type="text" name="id" placeholder="&nbsp;ID"></div>
+        <div class="input_1"><input type="password" name="new_pwd" placeholder="&nbsp;新密码"></div>
+        <div class="input_1"><button class="submit_1" type="submit">提&nbsp;交</button></div>
+        </form>
+    </div>
+    <button id="btn_2">删除</button>
+    <div class="form_2">
+        <form action="/web_delete" method="post">
+        <div class="input_1"><div class="login_logo">删除账号</div><div class="close_1">X</div></div>
+        <div class="input_1"><input type="text" name="id" placeholder="&nbsp;ID"></div>
+        <div class="input_1"><input type="text" name="name" placeholder="&nbsp;用户名"></div>
+        <div class="input_1"><button class="submit_1" type="submit">提&nbsp;交</div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
